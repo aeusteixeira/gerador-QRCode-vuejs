@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Gerador de QRCode feito com VueJS">
+    <script src="js/vue.min.js"></script>
+    <script src="js/qrious.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Gerador de QRCode</title>
+</head>
+<body>
+<main id="app">
+    <h1> {{title}} </h1>
+    <input type="text" v-model="text" size="25">
+    <div @v-if="text" class="output">
+        <img :src="newQRCode" alt="QRCode">
+    </div>
+</main>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                title: 'Gerador de QRCode',
+                text: 'http://matheustx.github.io',
+                qrcode: new QRious({ size: 300 })
+            },
+            computed:{
+                newQRCode(){
+                    this.qrcode.value = this.text
+                    return this.qrcode.toDataURL()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+
